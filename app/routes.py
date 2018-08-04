@@ -7,4 +7,15 @@ def index():
     """
     View function with route URL decorators
     """
-    return "Hello, World!"
+    user = {'username': 'Marwan'}
+    html_str = '''
+    <html>
+        <head>
+            <title>Home Page - Microblog</title>
+        </head>
+        <body>
+            <h1>Hello, ''' + user['username'] + '''!</h1>
+        </body>
+    </html>
+    '''
+    return html_str
