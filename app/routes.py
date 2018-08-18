@@ -51,7 +51,7 @@ def login():
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('/index'))
+    return redirect(url_for('index'))
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -69,3 +69,15 @@ def register():
         return redirect(url_for('login'))
 
     return render_template('register.html', title='Register', form=form)
+
+
+@app.route('/user/<username>')
+@login_required
+def user_page(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    # posts = user.posts
+    posts = [
+        {'author': user, 'body': 'Test post #1'},
+        {'author': user, 'body': 'Test post #1'}
+    ]
+    return render_template('user.html', user=user, posts=posts)
