@@ -1,6 +1,6 @@
 # microblog
 Microblogging app similar to twitter.
 
-##### Getting started:
+#### Getting started:
     `export FLASK_APP=mircroblog.py`  
     `flask run`  
