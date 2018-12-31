@@ -7,17 +7,24 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Le
 class LoginForm(FlaskForm):
 
     username = StringField('Username', validators=[DataRequired()])
+
     password = PasswordField('Password', validators=[DataRequired()])
+
     remember_me = BooleanField('Remember Me')
+
     submit = SubmitField('Sign In')
 
 
 class RegistrationForm(FlaskForm):
 
     username = StringField('Username', validators=[DataRequired()])
+
     email = StringField('Email', validators=[DataRequired(), Email()])
+
     password = PasswordField('Password', validators=[DataRequired()])
+
     password_verify = PasswordField('Re-enter Password', validators=[DataRequired(), EqualTo('password')])
+
     submit = SubmitField('Register')
 
     def validate_username(self, username):
@@ -34,7 +41,9 @@ class RegistrationForm(FlaskForm):
 class EditProfileForm(FlaskForm):
 
     username = StringField('Username', validators=[DataRequired()])
+
     bio = TextAreaField('Bio', validators=[Length(min=0, max=140)])
+
     submit = SubmitField('Submit')
 
     def __init__(self, original_username, *args, **kwargs):

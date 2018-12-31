@@ -90,6 +90,7 @@ def before_request():
         current_user.last_login = datetime.utcnow()
         db.session.commit()
 
+
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
@@ -107,3 +108,41 @@ def edit_profile():
         form.bio.data = current_user.bio
 
     return render_template('edit_profile.html', title='Edit Profile', form=form)
+
+
+@app.route('/follow/<username>')
+@login_required
+def follow(username):
+    other_user = User.query.filter_by(username=username).first()
+    if other_user is None:
+        flash('User {} not found.'.format(username))
+        return redirect(url_for('index'))
+
+    if current_user == other_user:
+        flash('You cannot follow yourself.')
+        return redirect(url_for('user', username=username))
+
+    current_user.follow(other_user)
+    db.session.commit()
+
+    flash('You are now following {}!'.format(username))
+    return redirect(url_for('user', username=username))
+
+
+@app.route('/unfollow/<username>')
+@login_required
+def unfollow(username):
+    other_user = User.query.filter_by(username=username).first()
+    if other_user is None:
+        flash('User {} not found.'.format(username))
+        return redirect(url_for('index'))
+
+    if current_user == other_user:
+        flash('You cannot unfollow yourself.')
+        return redirect(url_for('user', username=username))
+
+    current_user.unfollow(other_user)
+    db.session.commit()
+
+    flash('You\'ve unfollowed {}.'.format(username))
+    return redirect(url_for('user', username=username))
