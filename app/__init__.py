@@ -3,9 +3,11 @@ import os
 
 from config import Config
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
+from flask_mail import Mail
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
 from logging.handlers import SMTPHandler, RotatingFileHandler
 
 # MARK: App configurations
@@ -19,6 +21,10 @@ migrate = Migrate(app, db)
 # MARK: User authentication
 login = LoginManager(app)
 login.login_view = 'login'
+
+bootstrap = Bootstrap(app)
+
+mail = Mail(app)
 
 from app import routes, models, errors
 
