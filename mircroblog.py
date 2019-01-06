@@ -1,6 +1,8 @@
 # Python script at the top-level that defines the Flask application instance
-from app import app, db
+from app import create_app, db
 from app.models import User, Post
+
+app = create_app()
 
 
 @app.shell_context_processor
