@@ -109,7 +109,5 @@ venv.bak/
 *.iml/
 
 # Logs and databases
-*.log
-*.sql
-*.sqlite
-*.db
+app.db
+microblog.log*
