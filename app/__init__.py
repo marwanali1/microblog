@@ -2,6 +2,7 @@ import logging
 import os
 
 from config import Config
+from elasticsearch import Elasticsearch
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
@@ -31,6 +32,10 @@ def create_app(config_class=Config):
     bootstrap.init_app(app)
     mail.init_app(app)
     moment.init_app(app)
+
+    app.elasticsearch = None
+    if app.config['ELASTICSEARCH_URL']:
+        app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']])
 
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)

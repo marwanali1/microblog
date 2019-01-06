@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
-load_dotenv(os.path.join(BASEDIR, 'env'))
+load_dotenv(os.path.join(BASEDIR, '.env'))
 
 
 class Config(object):
@@ -21,3 +21,5 @@ class Config(object):
     ADMINS = ['marwanali2428@gmail.com']
 
     POSTS_PER_PAGE = 25
+
+    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
