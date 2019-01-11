@@ -6,8 +6,8 @@
             <td width="256px"><img src="{{ user.profile_photo(256) }}"></td>
             <td>
                 <h1>User: {{ user.username }}</h1>
-                {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
-                {% if user.last_login %}<p>Last seen on: {{ moment(user.last_login).format('LLL') }}</p>{% endif %}
+                {% if user.bio %}<p>{{ user.bio }}</p>{% endif %}
+                {% if user.last_login %}<p>Last login on: {{ moment(user.last_login).format('LLL') }}</p>{% endif %}
                 <p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following.</p>
                 {% if user == current_user %}
                 <p><a href="{{ url_for('main.edit_profile') }}">Edit your profile</a></p>
